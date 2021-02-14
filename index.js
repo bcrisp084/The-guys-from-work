@@ -5,8 +5,8 @@ const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 const render = require("./lib/renderhtml");
 const path = require("path");
-const output_dir = path.resolved(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+// const output_dir = path.resolved(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const employees = [];
 const idTaken = [];
