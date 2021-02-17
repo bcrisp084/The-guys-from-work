@@ -5,14 +5,14 @@ const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 const render = require("./lib/renderhtml");
 const path = require("path");
-// const output_dir = path.resolved(__dirname, "output");
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
-
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 const employees = [];
 const idTaken = [];
 
 const createManager = () => {
   console.log("Who are the guys from work");
+  console.log("--------------------------");
   inquirer
     .prompt([
       {
@@ -71,6 +71,7 @@ const createManager = () => {
         response.officeNumber
       );
       employees.push(manager);
+      idTaken.push(response.id);
       createEmployee();
     })
     .catch((err) => {
@@ -84,23 +85,21 @@ const createEmployee = () => {
       {
         type: "list",
         message: "Select an employee to add to the team",
-        name: "position",
+        name: "employees",
         choices: ["Engineer", "Intern", "Exit"],
       },
     ])
-    .then(function (response) {
-      if (response.position === "Engineer") {
+    .then((response) => {
+      if (response.employees === "Engineer") {
         addEngineer();
-      } else if (response.position === "Intern") {
+      } else if (response.employees === "Intern") {
         addIntern();
       } else {
-        fs.writeFile(
-          path.join(__dirname + "/output/", "team.html"),
-          render(employees),
-          (err) => {
-            throw err;
-          }
-        );
+        const renderHtml = render(employees);
+        fs.writeFile(outputPath, renderHtml, function (err) {
+          if (err) throw err;
+          console.log("Creating your team.");
+        });
       }
     });
 };
@@ -122,7 +121,7 @@ const addEngineer = () => {
       {
         type: "input",
         message: "Please enter the id number",
-        name: "id",
+        name: "engineerId",
         validate: (response) => {
           const pass = response.match(/^[1-9]\d*$/);
           if (pass) {
@@ -167,6 +166,7 @@ const addEngineer = () => {
         response.GitHub
       );
       employees.push(engineer);
+      idTaken.push(response.engineerId);
       createEmployee();
     })
     .catch((err) => {
@@ -191,7 +191,7 @@ const addIntern = () => {
       {
         type: "input",
         message: "Please enter the id number for the intern",
-        name: "id",
+        name: "internId",
         validate: (response) => {
           const pass = response.match(/^[1-9]\d*$/);
           if (pass) {
@@ -235,6 +235,7 @@ const addIntern = () => {
         response.GitHub
       );
       employees.push(intern);
+      idTaken.push(response.internId);
       createEmployee();
     })
     .catch((err) => {
