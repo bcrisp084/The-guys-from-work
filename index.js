@@ -7,7 +7,7 @@ const render = require("./lib/renderhtml");
 const path = require("path");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-const employees = [];
+const teamMates = [];
 const idTaken = [];
 
 const createManager = () => {
@@ -70,7 +70,7 @@ const createManager = () => {
         response.email,
         response.officeNumber
       );
-      employees.push(manager);
+      teamMates.push(manager);
       idTaken.push(response.id);
       createEmployee();
     })
@@ -95,7 +95,7 @@ const createEmployee = () => {
       } else if (response.employees === "Intern") {
         addIntern();
       } else {
-        const renderHtml = render(employees);
+        const renderHtml = render(teamMates);
         fs.writeFile(outputPath, renderHtml, function (err) {
           if (err) throw err;
           console.log("Creating your team.");
@@ -161,11 +161,11 @@ const addEngineer = () => {
     .then((response) => {
       const engineer = new Engineer(
         response.name,
-        response.id,
+        response.engineerId,
         response.email,
         response.GitHub
       );
-      employees.push(engineer);
+      teamMates.push(engineer);
       idTaken.push(response.engineerId);
       createEmployee();
     })
@@ -230,11 +230,11 @@ const addIntern = () => {
     .then((response) => {
       const intern = new Intern(
         response.name,
-        response.id,
+        response.internId,
         response.email,
-        response.GitHub
+        response.school
       );
-      employees.push(intern);
+      teamMates.push(intern);
       idTaken.push(response.internId);
       createEmployee();
     })
