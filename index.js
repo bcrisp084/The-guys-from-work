@@ -5,8 +5,8 @@ const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 const render = require("./lib/renderhtml");
 const path = require("path");
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "dist.html");
+const OUTPUT_DIR = path.resolve(__dirname, "dist");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 const teamMates = [];
 const idTaken = [];
 
