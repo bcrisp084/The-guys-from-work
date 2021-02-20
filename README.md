@@ -2,7 +2,7 @@
 
 A team profile generator
 
-## description
+## Description
 
 This is an application that was created using npm inquirer. It prompts the user for info
 about creating a work team and than generating the team based on user responses. The initial prompt asks to declare info about the manager than proceeds to an option to choose between adding an intern, engineer or finishing by exiting the program and generating the html file. You can add as many or as little as you like.
