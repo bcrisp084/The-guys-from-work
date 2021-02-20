@@ -6,7 +6,7 @@ const Manager = require("./lib/manager");
 const render = require("./lib/renderhtml");
 const path = require("path");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "dist.html");
 const teamMates = [];
 const idTaken = [];
 
