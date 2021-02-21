@@ -1,3 +1,5 @@
+// File paths, directories and npm packages required
+
 const fs = require("fs");
 const inquirer = require("inquirer");
 const Engineer = require("./lib/engineer");
@@ -7,9 +9,13 @@ const render = require("./lib/renderhtml");
 const path = require("path");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+// array and team id for teammates added
 const teamMates = [];
 const idTaken = [];
 
+// Arrow function to start the process that reners the manager
+/* All prompts have validation to ensure the user doesn't enter 
+incorrect info. */
 const createManager = () => {
   console.log("Who are the guys from work");
   console.log("--------------------------");
@@ -63,6 +69,8 @@ const createManager = () => {
         },
       },
     ])
+
+    // Responses are add to the manager that was created
     .then((response) => {
       const manager = new Manager(
         response.name,
@@ -79,6 +87,9 @@ const createManager = () => {
     });
 };
 
+/* Function to create a team member be it an engineer or an intern with the 
+option to end after adding the neccesary teammates. once ended the html page 
+is rendered */
 const createEmployee = () => {
   inquirer
     .prompt([
@@ -89,6 +100,8 @@ const createEmployee = () => {
         choices: ["Engineer", "Intern", "Exit"],
       },
     ])
+
+    // depending on the user response that function is called to generate that employee
     .then((response) => {
       if (response.employees === "Engineer") {
         addEngineer();
@@ -104,6 +117,7 @@ const createEmployee = () => {
     });
 };
 
+//function to create the engineer. all prompts have validation.
 const addEngineer = () => {
   inquirer
     .prompt([
@@ -158,6 +172,8 @@ const addEngineer = () => {
         },
       },
     ])
+
+    // repsonses are pushed to the new engineer
     .then((response) => {
       const engineer = new Engineer(
         response.name,
@@ -174,6 +190,7 @@ const addEngineer = () => {
     });
 };
 
+// function to create the intern. all prompts have validation to prevent user error.
 const addIntern = () => {
   inquirer
     .prompt([
@@ -227,6 +244,8 @@ const addIntern = () => {
         },
       },
     ])
+
+    //repsonses are pushed to the new intern.
     .then((response) => {
       const intern = new Intern(
         response.name,
@@ -242,5 +261,5 @@ const addIntern = () => {
       throw err;
     });
 };
-
+// starts the process of creating the team.
 createManager();
