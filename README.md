@@ -9,7 +9,7 @@ about creating a work team and than generating the team based on user responses.
 
 ## Instructions
 
-To run the program make sure an npm install was performed and procced with running the file with the command "node index" in the terminal.
+To run the program make sure an npm install was performed and proceed with running the file with the command "node index" in the terminal.
 
 ## License
 
